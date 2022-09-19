@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://fcs2.changiairport.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fcs2.changiairport.com" elementFormDefault="qualified" version="1.0" id="FCS2_1.0">
+    <xs:include schemaLocation="CAG_FCS2_CommonTypes.xsd"/>
+    <xs:element name="Envelope">
+        <xs:annotation>
+            <xs:documentation>Used for request and response services in FCS2 format.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="StatusRequest" type="StatusRequest">
+                    <xs:annotation>
+                        <xs:documentation>Sent by client to request status of the service. This message may be sent by the client at any time, whether or not it has subscribed.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="StatusResponse" type="StatusResponse">
+                    <xs:annotation>
+                        <xs:documentation>Contains the current status of the Gateway service. Sent by the service provider to a client in response to an StatusRequest message.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="SubscriptionRequest" type="SubscriptionRequest">
+                    <xs:annotation>
+                        <xs:documentation>Sent by a client subscriber to request the service provider to begin providing data according to the specified parameters.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>                
+                <xs:element name="SubscriptionResponse" type="SubscriptionResponse">
+                    <xs:annotation>
+                        <xs:documentation>Sent by the service provider to the client in response to an SubscriptionRequest.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="SubscriptionCancellationRequest" type="SubscriptionCancellationRequest">
+                    <xs:annotation>
+                        <xs:documentation>Sent by a client subscriber to request the service provider to stop sending data.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>                
+                <xs:element name="SubscriptionCancellationResponse" type="SubscriptionCancellationResponse">
+                    <xs:annotation>
+                        <xs:documentation>Sent by the service provider to the client in response to an SubscriptionCancellationRequest.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+            <xs:attributeGroup ref="FCS2_PayloadStdAttributes"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

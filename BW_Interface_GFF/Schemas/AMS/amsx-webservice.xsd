@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	xmlns="http://www.sita.aero/ams6-xml-api-webservice"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ams-datatypes="http://www.sita.aero/ams6-xml-api-datatypes"
+	targetNamespace="http://www.sita.aero/ams6-xml-api-webservice"
+	elementFormDefault="qualified">
+
+	<xs:import schemaLocation="amsx-datatypes.xsd" namespace="http://www.sita.aero/ams6-xml-api-datatypes"/>
+
+	<xs:element name="WebServiceResult">
+		<xs:complexType>
+      <xs:sequence>
+        <xs:element name="ApiResponse" type="ams-datatypes:ApiResponse"/>
+      </xs:sequence>      
+			<xs:attribute name="apiVersion" type="ams-datatypes:ApiVersion" use="required" />      
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

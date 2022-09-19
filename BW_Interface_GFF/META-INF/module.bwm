@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_HN-qEGFUEeyCVqop_lngEA" targetNamespace="http://tns.tibco.com/bw/composite/BW_Interface_GFF" name="BW_Interface_GFF" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_I3Ze8GFUEeyCVqop_lngEA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3aGAGFUEeyCVqop_lngEA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3jP8GFUEeyCVqop_lngEA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3jP8WFUEeyCVqop_lngEA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3jP8mFUEeyCVqop_lngEA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3sZ4GFUEeyCVqop_lngEA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3u2IGFUEeyCVqop_lngEA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I3yggGFUEeyCVqop_lngEA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_I32K4GFUEeyCVqop_lngEA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_bQWcEGIsEey-NaPH4z8bsw" name="/G_JMS/URL" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_x52YgGIsEey-NaPH4z8bsw" name="/G_JMS/Password" type="property:password" scaext:simpleValue="#!x50j9amCqT9nb52VAYqVLQ==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_0hiMcGIsEey-NaPH4z8bsw" name="/G_JMS/Username" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_3j-CsGIsEey-NaPH4z8bsw" name="/G_JMS/TimeoutSeconds" type="XMLSchema:int" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_7U2y0GR7EeysXNCjEDIN4w" name="/DownstreamQueues/SubscriptionRequestQueue" type="XMLSchema:string" description="Name it - SubscriptionReqQ&#xD;&#xA;SubscriptionResQ&#xD;&#xA;NotificationReqQ&#xD;&#xA;NotificationResQ" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_D8VmAGR8EeysXNCjEDIN4w" name="/DownstreamQueues/SubscriptionResponseQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_EDmEkGR8EeysXNCjEDIN4w" name="/DownstreamQueues/NotificationTopic" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_JAAugH9HEeyuoqP-u2EDoQ" name="/DownstreamQueues/NotificationClientResQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nRvGgII6EeysE_QWe5tg2g" name="/DownstreamQueues/HealthStatusReqQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nTcWsII6EeysE_QWe5tg2g" name="/DownstreamQueues/HealthStatusResQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_7ZiegGR7EeysXNCjEDIN4w" name="/InternalQueues/SnapshotReqQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_2TwoEHRAEeyXQptVqoOdTg" name="/InternalQueues/SnapshotResQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_2RiBEH-REeyCXPc5XgFtYg" name="/InternalQueues/PubSysHealthReqQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bM1xQII6EeysE_QWe5tg2g" name="/InternalQueues/NotificationSysQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Y_qOcIjREeyfyuWiXUquCA" name="/InternalQueues/PubSysHealthResQueue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_gIx_II_VEeyxJ4fxS-IwDg" name="/InternalQueues/HeartbeatInternalQ" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_fSsGYGbdEeyRnNVj-_EHVw" name="/State/Subscribed" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_os9BYGbdEeyRnNVj-_EHVw" name="/State/Unsubscribed" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_o0U0sGbdEeyRnNVj-_EHVw" name="/State/Available" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_uTBSAGbdEeyRnNVj-_EHVw" name="/State/Unavailable" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_lGHzoGx6EeyOA4_Ga24jAg" name="/Status/Rejected" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_q43OUGx6EeyOA4_Ga24jAg" name="/Status/Accepted" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_q-tXoGx6EeyOA4_Ga24jAg" name="/Status/Unavailable" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_WTKnYIJMEey0vahUbDbbTQ" name="/TimeInterval/HealthStatusInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_eGQwQIJMEey0vahUbDbbTQ" name="/TimeInterval/SubscriptionResetDays" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_IaGP0IggEeyVDoPQEMRygw" name="/TimeInterval/SnapshotNotiHoldTimeHR" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mRVI0IghEeyVDoPQEMRygw" name="/TimeInterval/SnapshotNotiHoldTimeMin" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mVBWAIghEeyVDoPQEMRygw" name="/TimeInterval/SnapshotNotiHoldTimeSec" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Gbao8I7sEeyxJ4fxS-IwDg" name="/TimeInterval/PollingInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RbRe0JN4Eey8l8Usm4erlQ" name="/TimeInterval/HealthCheckTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_4J3LwJV2Eeyam-7T3-ebfQ" name="/TimeInterval/InitialTimeStamp" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_uKzUoJYFEeyam-7T3-ebfQ" name="/TimeInterval/QueueTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ni6IQKUnEey7v_QbEPVi8Q" name="/TimeInterval/SnapshotQueueTime" type="XMLSchema:int" scaext:simpleValue="0" scalable="true"/>
+  <sca:property xmi:id="_a6kQsIKWEeyDJNiLq03MJA" name="/G_Mappings/SnapshotMsg" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_fuocoIKWEeyDJNiLq03MJA" name="/G_Mappings/MaxSubscCount" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_inC0MIKWEeyDJNiLq03MJA" name="/G_Mappings/UpdatesOnlyMsg" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Qy7qoIKcEeyDJNiLq03MJA" name="/G_Mappings/ClientStateTrue" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_VLniIIKcEeyDJNiLq03MJA" name="/G_Mappings/ClientStateFalse" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_foVjMIKdEeyDJNiLq03MJA" name="/G_Mappings/IntervalInSec" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ARCTsIKeEeyDJNiLq03MJA" name="/G_Mappings/MaxConsecutiveMissedCnt" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_BSmCEILEEeyYJbwby4gO7w" name="/G_Mappings/GFF_PubSys_Snapshot" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_E6G7UILEEeyYJbwby4gO7w" name="/G_Mappings/End" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_-MNvcIXCEeyn-tKbAuVZig" name="/G_Mappings/FlightWindow" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Eop_sIXJEeyn-tKbAuVZig" name="/G_Mappings/SnapshotFlagYes" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_EqP7IIXJEeyn-tKbAuVZig" name="/G_Mappings/SnapshotFlagNo" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Er454IXJEeyn-tKbAuVZig" name="/G_Mappings/InternalSnapshotFlag" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MeyZAIXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/SystemUnavailable" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SubyIIXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/CurrentlySubscribed" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SvoE8IXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/SubscriptionLimitExceeded" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SyWBwIXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/RequestNotPossible" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SztTsIXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/CurrentlyNotSubscribed" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_gXtEMIXKEeyn-tKbAuVZig" name="/G_Mappings/SubscriptionResponses/Unsubscribed" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_4rqHYIgnEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/Version" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GTsDUIgoEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/CompanyShortName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GVokEIgoEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/ArrivalAirpot" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GXLcMIgoEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/CodeContext" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GY0a8IgoEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/OrigionDate" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GamjoIgoEeyVDoPQEMRygw" name="/G_Mappings/AMStoAIDXMappings/OperationTime" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_IEYGkGFUEeyCVqop_lngEA" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_IEZUsGFUEeyCVqop_lngEA" processName="bw_interface_gff.NotificationProcess"/>
+  </sca:component>
+  <sca:component xmi:id="_RcQpcWbaEeyRnNVj-_EHVw" name="ComponentGFF_ServiceStartUp" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_RcQpcmbaEeyRnNVj-_EHVw" processName="bw_interface_gff.GFF_ServiceStartUp"/>
+  </sca:component>
+  <sca:component xmi:id="_VCTm4HK-Eeyjttz6BfcobQ" name="ComponentValidate" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_VCTm4XK-Eeyjttz6BfcobQ" processName="Stub.NotificationTopicStub"/>
+  </sca:component>
+  <sca:component xmi:id="_bIPPgHmyEey2kvEJ0Vd9bw" name="ComponentValidateNotifications" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_bIPPgXmyEey2kvEJ0Vd9bw" processName="Stub.ValidateNotifications"/>
+  </sca:component>
+  <sca:component xmi:id="_AljeMHm2Eey2kvEJ0Vd9bw" name="ComponentStateScheduler" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_AljeMXm2Eey2kvEJ0Vd9bw" processName="bw_interface_gff.SubscriptionCounterReset"/>
+  </sca:component>
+  <sca:component xmi:id="_o2uIwX9EEeyuoqP-u2EDoQ" name="ComponentCopyOfSubscription" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_o2uIwn9EEeyuoqP-u2EDoQ" processName="Stub.SubscriptionStub"/>
+  </sca:component>
+  <sca:component xmi:id="_20HAgISxEey21-IQK5W85Q" name="ComponentHelthCheckStub" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_20HAgYSxEey21-IQK5W85Q" processName="Stub.HealthCheckStub"/>
+  </sca:component>
+  <sca:component xmi:id="__ypPcIfrEey0ldm6FE6B_g" name="ComponentTestNotiHoldForSnapshot" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="__ypPcYfrEey0ldm6FE6B_g" processName="Stub.TestNotiHoldForSnapshot"/>
+  </sca:component>
+  <sca:component xmi:id="_f23eQIgKEey0ldm6FE6B_g" name="ComponentSnapFlagSet" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_f23eQYgKEey0ldm6FE6B_g" processName="Stub.SnapFlagSet"/>
+  </sca:component>
+  <sca:component xmi:id="_F8AuEI1VEeyxJ4fxS-IwDg" name="ComponentPubSys_HealthCheck" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_F8AuEY1VEeyxJ4fxS-IwDg" processName="bw_interface_gff.PubSys_HealthCheck"/>
+  </sca:component>
+  <sca:component xmi:id="_4mVskI5IEeyxJ4fxS-IwDg" name="ComponentClientSubscriptionProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_4mVskY5IEeyxJ4fxS-IwDg" processName="bw_interface_gff.ClientSubscriptionProcess"/>
+  </sca:component>
+  <sca:component xmi:id="_inSLAJU9Eeyam-7T3-ebfQ" name="ComponentCopyOfHeartBeatProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_inSLAZU9Eeyam-7T3-ebfQ" processName="bw_interface_gff.HeartBeatProcess"/>
+  </sca:component>
+  <sca:component xmi:id="_l2sCAJYIEeyam-7T3-ebfQ" name="Component1ClientSubscriptionProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_l2sCAZYIEeyam-7T3-ebfQ" processName="Stub.ClientSubscriptionProcess"/>
+  </sca:component>
+  <sca:component xmi:id="_vJzzMJYIEeyam-7T3-ebfQ" name="ComponentHeartBeatProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_vJzzMZYIEeyam-7T3-ebfQ" processName="Stub.HeartBeatProcess"/>
+  </sca:component>
+  <sca:component xmi:id="_0Pc3UJYIEeyam-7T3-ebfQ" name="Component1PubSys_HealthCheck" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_0Pc3UZYIEeyam-7T3-ebfQ" processName="Stub.PubSys_HealthCheck"/>
+  </sca:component>
+  <sca:component xmi:id="_RSDwMJlREey0tdQbPVvH6g" name="ComponentCopyOfArrivalFlight" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_RSDwMZlREey0tdQbPVvH6g" processName="Stub.ArrivalFlight"/>
+  </sca:component>
+  <sca:component xmi:id="_aEtK0J3hEeyL0pw8uW6GPQ" name="ComponentCopyOfDepartureFlight" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_aEtK0Z3hEeyL0pw8uW6GPQ" processName="Stub.DepartureFlight"/>
+  </sca:component>
+  <sca:component xmi:id="_CxM4EJ-iEey0GMMJBqKyJg" name="ComponentSysNotificationReceiver" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_CxM4EZ-iEey0GMMJBqKyJg" processName="Stub.SysNotificationReceiver"/>
+  </sca:component>
+  <sca:component xmi:id="_aL128KA5Eey0GMMJBqKyJg" name="Component1CopyOfArrivalFlight" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_aL128aA5Eey0GMMJBqKyJg" processName="Stub.CopyOfArrivalFlight"/>
+  </sca:component>
+  <sca:component xmi:id="_sMh4QKkYEeyGg5vq0iu8MQ" name="Componentsample" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_sMh4QakYEeyGg5vq0iu8MQ" processName="Stub.sample"/>
+  </sca:component>
+  <sca:component xmi:id="_xMNDAKkzEeyI8tONnUVY1A" name="Component1SysNotificationReceiver" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_xMNDAakzEeyI8tONnUVY1A" processName="bw_interface_gff.SysNotificationReceiver"/>
+  </sca:component>
+</sca:composite>

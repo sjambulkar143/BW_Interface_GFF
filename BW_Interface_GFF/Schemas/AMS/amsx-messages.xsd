@@ -1,0 +1,1658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+  xmlns="http://www.sita.aero/ams6-xml-api-messages"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ams-datatypes="http://www.sita.aero/ams6-xml-api-datatypes"
+  targetNamespace="http://www.sita.aero/ams6-xml-api-messages"
+  elementFormDefault="qualified">
+
+  <xs:import schemaLocation="amsx-datatypes.xsd" namespace="http://www.sita.aero/ams6-xml-api-datatypes"/>
+
+  <xs:element name="Envelope">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Content">
+          <xs:complexType>
+            <xs:choice>
+              <xs:element name="FlightLinkRequest" type="FlightLinkRequest" />
+              <xs:element name="FlightUnlinkRequest" type="FlightUnlinkRequest" />
+              <xs:element name="FlightLockRequest" type="FlightLockRequest" />
+              <xs:element name="FlightUnlockRequest" type="FlightUnlockRequest" />
+              <xs:element name="FlightUpdateRequest" type="FlightUpdateRequest" />
+              <xs:element name="FlightCreateRequest" type="FlightCreateRequest" />
+              <xs:element name="FlightDeleteRequest" type="FlightDeleteRequest" />
+              <xs:element name="FlightUpdatedNotification" type="FlightUpdatedNotification"/>
+              <xs:element name="FlightCreatedNotification" type="FlightCreatedNotification"/>
+              <xs:element name="FlightDeletedNotification" type="FlightDeletedNotification"/>
+              <xs:element name="AirportUpdateRequest" type="AirportUpdateRequest" />
+              <xs:element name="AirportDeleteRequest" type="AirportDeleteRequest" />
+              <xs:element name="AirportCreateRequest" type="AirportCreateRequest" />
+              <xs:element name="AirportUpdatedNotification" type="AirportUpdatedNotification"/>
+              <xs:element name="AirportCreatedNotification" type="AirportCreatedNotification"/>
+              <xs:element name="AirportDeletedNotification" type="AirportDeletedNotification"/>
+              <xs:element name="AircraftUpdateRequest" type="AircraftUpdateRequest" />
+              <xs:element name="AircraftCreateRequest" type="AircraftCreateRequest" />
+              <xs:element name="AircraftDeleteRequest" type="AircraftDeleteRequest" />
+              <xs:element name="AircraftUpdatedNotification" type="AircraftUpdatedNotification"/>
+              <xs:element name="AircraftCreatedNotification" type="AircraftCreatedNotification"/>
+              <xs:element name="AircraftDeletedNotification" type="AircraftDeletedNotification"/>
+              <xs:element name="AircraftTypeUpdateRequest" type="AircraftTypeUpdateRequest" />
+              <xs:element name="AircraftTypeCreateRequest" type="AircraftTypeCreateRequest" />
+              <xs:element name="AircraftTypeDeleteRequest" type="AircraftTypeDeleteRequest" />
+              <xs:element name="AircraftTypeUpdatedNotification" type="AircraftTypeUpdatedNotification"/>
+              <xs:element name="AircraftTypeCreatedNotification" type="AircraftTypeCreatedNotification"/>
+              <xs:element name="AircraftTypeDeletedNotification" type="AircraftTypeDeletedNotification"/>
+              <xs:element name="AirlineUpdateRequest" type="AirlineUpdateRequest" />
+              <xs:element name="AirlineCreateRequest" type="AirlineCreateRequest" />
+              <xs:element name="AirlineDeleteRequest" type="AirlineDeleteRequest" />
+              <xs:element name="AirlineUpdatedNotification" type="AirlineUpdatedNotification"/>
+              <xs:element name="AirlineCreatedNotification" type="AirlineCreatedNotification"/>
+              <xs:element name="AirlineDeletedNotification" type="AirlineDeletedNotification"/>
+              <xs:element name="CustomsTypeUpdateRequest" type="CustomsTypeUpdateRequest" />
+              <xs:element name="CustomsTypeCreateRequest" type="CustomsTypeCreateRequest" />
+              <xs:element name="CustomsTypeDeleteRequest" type="CustomsTypeDeleteRequest" />
+              <xs:element name="CustomsTypeUpdatedNotification" type="CustomsTypeUpdatedNotification"/>
+              <xs:element name="CustomsTypeCreatedNotification" type="CustomsTypeCreatedNotification"/>
+              <xs:element name="CustomsTypeDeletedNotification" type="CustomsTypeDeletedNotification"/>
+              <xs:element name="RouteUpdateRequest" type="RouteUpdateRequest" />
+              <xs:element name="RouteCreateRequest" type="RouteCreateRequest" />
+              <xs:element name="RouteDeleteRequest" type="RouteDeleteRequest" />
+              <xs:element name="RouteDeletedNotification" type="RouteDeletedNotification"/>
+              <xs:element name="RouteUpdatedNotification" type="RouteUpdatedNotification"/>
+              <xs:element name="RouteCreatedNotification" type="RouteCreatedNotification"/>
+              <xs:element name="CreateScheduledFlightsRequest" type="CreateScheduledFlightsRequest"/>
+              <xs:element name="UpdateScheduledFlightsRequest" type="UpdateScheduledFlightsRequest"/>
+              <xs:element name="DeleteScheduledFlightsRequest" type="DeleteScheduledFlightsRequest"/>
+              <xs:element name="UnrecognizedScheduledFlightsRequest" type="UnrecognizedScheduledFlightsRequest" />
+              <xs:element name="AssignFlightsRequest" type="AssignFlightsRequest" />
+              <xs:element name="StandCreateRequest" type="StandCreateRequest" />
+              <xs:element name="StandUpdateRequest" type="StandUpdateRequest" />
+              <xs:element name="StandCreatedNotification" type="StandCreatedNotification" />
+              <xs:element name="StandUpdatedNotification" type="StandUpdatedNotification" />
+              <xs:element name="StandDeletedNotification" type="StandDeletedNotification" />
+              <xs:element name="ChuteCreateRequest" type="ChuteCreateRequest" />
+              <xs:element name="ChuteUpdateRequest" type="ChuteUpdateRequest" />
+              <xs:element name="ChuteCreatedNotification" type="ChuteCreatedNotification" />
+              <xs:element name="ChuteUpdatedNotification" type="ChuteUpdatedNotification" />
+              <xs:element name="ChuteDeletedNotification" type="ChuteDeletedNotification" />
+              <xs:element name="CheckInCreateRequest" type="CheckInCreateRequest" />
+              <xs:element name="CheckInUpdateRequest" type="CheckInUpdateRequest" />
+              <xs:element name="CheckInCreatedNotification" type="CheckInCreatedNotification" />
+              <xs:element name="CheckInUpdatedNotification" type="CheckInUpdatedNotification" />
+              <xs:element name="CheckInDeletedNotification" type="CheckInDeletedNotification" />
+              <xs:element name="CarouselCreateRequest" type="CarouselCreateRequest" />
+              <xs:element name="CarouselUpdateRequest" type="CarouselUpdateRequest" />
+              <xs:element name="CarouselCreatedNotification" type="CarouselCreatedNotification" />
+              <xs:element name="CarouselUpdatedNotification" type="CarouselUpdatedNotification" />
+              <xs:element name="CarouselDeletedNotification" type="CarouselDeletedNotification" />
+              <xs:element name="GateCreateRequest" type="GateCreateRequest" />
+              <xs:element name="GateUpdateRequest" type="GateUpdateRequest" />
+              <xs:element name="GateCreatedNotification" type="GateCreatedNotification" />
+              <xs:element name="GateUpdatedNotification" type="GateUpdatedNotification" />
+              <xs:element name="GateDeletedNotification" type="GateDeletedNotification" />
+              <xs:element name="LoungeCreateRequest" type="LoungeCreateRequest" />
+              <xs:element name="LoungeUpdateRequest" type="LoungeUpdateRequest" />
+              <xs:element name="LoungeCreatedNotification" type="LoungeCreatedNotification" />
+              <xs:element name="LoungeUpdatedNotification" type="LoungeUpdatedNotification" />
+              <xs:element name="LoungeDeletedNotification" type="LoungeDeletedNotification" />
+              <xs:element name="VehicleCreateRequest" type="VehicleCreateRequest" />
+              <xs:element name="VehicleUpdateRequest" type="VehicleUpdateRequest" />
+              <xs:element name="VehicleCreatedNotification" type="VehicleCreatedNotification" />
+              <xs:element name="VehicleUpdatedNotification" type="VehicleUpdatedNotification" />
+              <xs:element name="VehicleDeletedNotification" type="VehicleDeletedNotification" />
+              <xs:element name="ArrivalDeskCreateRequest" type="ArrivalDeskCreateRequest" />
+              <xs:element name="ArrivalDeskUpdateRequest" type="ArrivalDeskUpdateRequest" />
+              <xs:element name="ArrivalDeskCreatedNotification" type="ArrivalDeskCreatedNotification" />
+              <xs:element name="ArrivalDeskUpdatedNotification" type="ArrivalDeskUpdatedNotification" />
+              <xs:element name="ArrivalDeskDeletedNotification" type="ArrivalDeskDeletedNotification" />
+              <xs:element name="AreaCreateRequest" type="AreaCreateRequest" />
+              <xs:element name="AreaUpdateRequest" type="AreaUpdateRequest" />
+              <xs:element name="AreaDeleteRequest" type="AreaDeleteRequest" />
+              <xs:element name="AreaCreatedNotification" type="AreaCreatedNotification" />
+              <xs:element name="AreaUpdatedNotification" type="AreaUpdatedNotification" />
+              <xs:element name="AreaDeletedNotification" type="AreaDeletedNotification" />
+              <xs:element name="MovementCreatedNotification" type="MovementCreatedNotification"/>
+              <xs:element name="MovementUpdatedNotification" type="MovementUpdatedNotification"/>
+              <xs:element name="MovementDeletedNotification" type="MovementDeletedNotification"/>
+              <xs:element name="CommonCheckInShapeCreatedNotification" type="CommonCheckInShapeCreatedNotification"/>
+              <xs:element name="CommonCheckInShapeUpdatedNotification" type="CommonCheckInShapeUpdatedNotification"/>
+              <xs:element name="CommonCheckInShapeDeletedNotification" type="CommonCheckInShapeDeletedNotification"/>
+              <xs:element name="CommonArrivalDeskShapeCreatedNotification" type="CommonArrivalDeskShapeCreatedNotification"/>
+              <xs:element name="CommonArrivalDeskShapeUpdatedNotification" type="CommonArrivalDeskShapeUpdatedNotification"/>
+              <xs:element name="CommonArrivalDeskShapeDeletedNotification" type="CommonArrivalDeskShapeDeletedNotification"/>
+              <xs:element name="CreateStandDowngradesRequest" type="CreateStandDowngradesRequest" />
+              <xs:element name="UpdateStandDowngradesRequest" type="UpdateStandDowngradesRequest" />
+              <xs:element name="DeleteStandDowngradesRequest" type="DeleteStandDowngradesRequest" />
+              <xs:element name="StandDowngradeCreatedNotification" type="StandDowngradeCreatedNotification"/>
+              <xs:element name="StandDowngradeUpdatedNotification" type="StandDowngradeUpdatedNotification"/>
+              <xs:element name="StandDowngradeDeletedNotification" type="StandDowngradeDeletedNotification"/>
+              <xs:element name="CreateChuteDowngradesRequest" type="CreateChuteDowngradesRequest" />
+              <xs:element name="UpdateChuteDowngradesRequest" type="UpdateChuteDowngradesRequest" />
+              <xs:element name="DeleteChuteDowngradesRequest" type="DeleteChuteDowngradesRequest" />
+              <xs:element name="ChuteDowngradeCreatedNotification" type="ChuteDowngradeCreatedNotification"/>
+              <xs:element name="ChuteDowngradeUpdatedNotification" type="ChuteDowngradeUpdatedNotification"/>
+              <xs:element name="ChuteDowngradeDeletedNotification" type="ChuteDowngradeDeletedNotification"/>
+              <xs:element name="CreateCheckInDowngradesRequest" type="CreateCheckInDowngradesRequest" />
+              <xs:element name="UpdateCheckInDowngradesRequest" type="UpdateCheckInDowngradesRequest" />
+              <xs:element name="DeleteCheckInDowngradesRequest" type="DeleteCheckInDowngradesRequest" />
+              <xs:element name="CheckInDowngradeCreatedNotification" type="CheckInDowngradeCreatedNotification"/>
+              <xs:element name="CheckInDowngradeUpdatedNotification" type="CheckInDowngradeUpdatedNotification"/>
+              <xs:element name="CheckInDowngradeDeletedNotification" type="CheckInDowngradeDeletedNotification"/>
+              <xs:element name="CreateCarouselDowngradesRequest" type="CreateCarouselDowngradesRequest" />
+              <xs:element name="UpdateCarouselDowngradesRequest" type="UpdateCarouselDowngradesRequest" />
+              <xs:element name="DeleteCarouselDowngradesRequest" type="DeleteCarouselDowngradesRequest" />
+              <xs:element name="CarouselDowngradeCreatedNotification" type="CarouselDowngradeCreatedNotification"/>
+              <xs:element name="CarouselDowngradeUpdatedNotification" type="CarouselDowngradeUpdatedNotification"/>
+              <xs:element name="CarouselDowngradeDeletedNotification" type="CarouselDowngradeDeletedNotification"/>
+              <xs:element name="CreateGateDowngradesRequest" type="CreateGateDowngradesRequest" />
+              <xs:element name="UpdateGateDowngradesRequest" type="UpdateGateDowngradesRequest" />
+              <xs:element name="DeleteGateDowngradesRequest" type="DeleteGateDowngradesRequest" />
+              <xs:element name="GateDowngradeCreatedNotification" type="GateDowngradeCreatedNotification"/>
+              <xs:element name="GateDowngradeUpdatedNotification" type="GateDowngradeUpdatedNotification"/>
+              <xs:element name="GateDowngradeDeletedNotification" type="GateDowngradeDeletedNotification"/>
+              <xs:element name="CreateLoungeDowngradesRequest" type="CreateLoungeDowngradesRequest" />
+              <xs:element name="UpdateLoungeDowngradesRequest" type="UpdateLoungeDowngradesRequest" />
+              <xs:element name="DeleteLoungeDowngradesRequest" type="DeleteLoungeDowngradesRequest" />
+              <xs:element name="LoungeDowngradeCreatedNotification" type="LoungeDowngradeCreatedNotification"/>
+              <xs:element name="LoungeDowngradeUpdatedNotification" type="LoungeDowngradeUpdatedNotification"/>
+              <xs:element name="LoungeDowngradeDeletedNotification" type="LoungeDowngradeDeletedNotification"/>
+              <xs:element name="CreateVehicleDowngradesRequest" type="CreateVehicleDowngradesRequest" />
+              <xs:element name="UpdateVehicleDowngradesRequest" type="UpdateVehicleDowngradesRequest" />
+              <xs:element name="DeleteVehicleDowngradesRequest" type="DeleteVehicleDowngradesRequest" />              
+              <xs:element name="VehicleDowngradeCreatedNotification" type="VehicleDowngradeCreatedNotification"/>
+              <xs:element name="VehicleDowngradeUpdatedNotification" type="VehicleDowngradeUpdatedNotification"/>
+              <xs:element name="VehicleDowngradeDeletedNotification" type="VehicleDowngradeDeletedNotification"/>
+              <xs:element name="CreateArrivalDeskDowngradesRequest" type="CreateArrivalDeskDowngradesRequest" />
+              <xs:element name="UpdateArrivalDeskDowngradesRequest" type="UpdateArrivalDeskDowngradesRequest" />
+              <xs:element name="DeleteArrivalDeskDowngradesRequest" type="DeleteArrivalDeskDowngradesRequest" />
+              <xs:element name="ArrivalDeskDowngradeCreatedNotification" type="ArrivalDeskDowngradeCreatedNotification"/>
+              <xs:element name="ArrivalDeskDowngradeUpdatedNotification" type="ArrivalDeskDowngradeUpdatedNotification"/>
+              <xs:element name="ArrivalDeskDowngradeDeletedNotification" type="ArrivalDeskDowngradeDeletedNotification"/>
+              
+              <xs:element name="SlotRequestCreateRequest" type="SlotRequestCreateRequest" />
+              <xs:element name="SlotRequestCreateInComplianceRequest" type="SlotRequestCreateInComplianceRequest" />
+              <xs:element name="SlotRequestUpdateRequest" type="SlotRequestUpdateRequest" />
+              <xs:element name="SlotRequestUpdateStatusRequest" type="SlotRequestUpdateStatusRequest" />
+              <xs:element name="SlotRequestSplitRequest" type="SlotRequestSplitRequest" />
+              <xs:element name="SlotRequestDeleteRequest" type="SlotRequestDeleteRequest" />
+              <xs:element name="SlotRequestCreatedNotification" type="SlotRequestCreatedNotification" />
+              <xs:element name="SlotRequestUpdatedNotification" type="SlotRequestUpdatedNotification" />
+              <xs:element name="SlotRequestDeletedNotification" type="SlotRequestDeletedNotification" />
+              <xs:element name="ApiResponse" type="ams-datatypes:ApiResponse"/>
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="apiVersion" type="ams-datatypes:ApiVersion" use="required" />
+      <xs:attribute name="user" type="ams-datatypes:User"/>
+      <xs:attribute name="timestamp" type="ams-datatypes:Timestamp" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="FlightUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+
+      <xs:element name="TableValueUpdate" type="ams-datatypes:TableValueUpdate" minOccurs="0" maxOccurs="unbounded" />
+
+      <xs:element name="ActivityUpdate" type="ams-datatypes:ActivityUpdate" minOccurs="0" maxOccurs="unbounded" />
+
+      <xs:element name="EventUpdate" type="ams-datatypes:EventUpdate" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FlightUpdateInformationExtended">
+    <xs:complexContent>
+      <xs:extension base="FlightUpdateInformation">
+        <xs:sequence>
+          <xs:element name="CodeSharesUpdate" type="ams-datatypes:CodeShares" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightUnlinkRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>          
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightLinkRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SourceFlightId" type="ams-datatypes:FlightId"/>
+          <xs:element name="TargetFlightId" type="ams-datatypes:FlightId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightUnlockRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightLockRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="FlightUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>
+          <xs:element name="FlightUpdates" type="FlightUpdateInformationExtended" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>
+          <xs:element name="FlightUpdates" type="FlightUpdateInformationExtended" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightId" type="ams-datatypes:FlightId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlightCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Flight" type="ams-datatypes:Flight" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FlightUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Flight" type="ams-datatypes:Flight" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FlightDeletedNotification">
+    <xs:sequence>
+      <xs:element name="Flight" type="ams-datatypes:Flight" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MovementCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Movement" type="ams-datatypes:Movement" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MovementUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Movement" type="ams-datatypes:Movement" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MovementDeletedNotification">
+    <xs:sequence>
+      <xs:element name="Movement" type="ams-datatypes:Movement" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirportUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirportUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirportId" type="ams-datatypes:AirportId"/>
+          <xs:element name="AirportUpdates" type="AirportUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirportDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirportId" type="ams-datatypes:AirportId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirportCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirportId" type="ams-datatypes:AirportId"/>
+          <xs:element name="AirportUpdates" type="AirportUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirportUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="AirportInformation" type="ams-datatypes:AirportInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirportCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Airport" type="ams-datatypes:AirportInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirportDeletedNotification">
+    <xs:sequence>
+      <xs:element name="AirportId" type="ams-datatypes:AirportId" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftId" type="ams-datatypes:AircraftId"/>
+          <xs:element name="AircraftUpdates" type="AircraftUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftId" type="ams-datatypes:AircraftId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftId" type="ams-datatypes:AircraftId"/>
+          <xs:element name="AircraftUpdates" type="AircraftUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="AircraftInformation" type="ams-datatypes:AircraftInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Aircraft" type="ams-datatypes:AircraftInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftDeletedNotification">
+    <xs:sequence>
+      <xs:element name="AircraftId" type="ams-datatypes:AircraftId" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftTypeId" type="ams-datatypes:AircraftTypeId"/>
+          <xs:element name="AircraftTypeUpdates" type="AircraftTypeUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftTypeId" type="ams-datatypes:AircraftTypeId"/>
+          <xs:element name="AircraftTypeUpdates" type="AircraftTypeUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AircraftTypeId" type="ams-datatypes:AircraftTypeId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="AircraftTypeInformation" type="ams-datatypes:AircraftTypeInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="AircraftType" type="ams-datatypes:AircraftTypeInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AircraftTypeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="AircraftTypeId" type="ams-datatypes:AircraftTypeId" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirlineId" type="ams-datatypes:AirlineId"/>
+          <xs:element name="AirlineUpdates" type="AirlineUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirlineId" type="ams-datatypes:AirlineId"/>
+          <xs:element name="AirlineUpdates" type="AirlineUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirlineId" type="ams-datatypes:AirlineId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="AirlineInformation" type="ams-datatypes:AirlineInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Airline" type="ams-datatypes:AirlineInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AirlineDeletedNotification">
+    <xs:sequence>
+      <xs:element name="AirlineId" type="ams-datatypes:AirlineId" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CustomsTypeId" type="ams-datatypes:CustomsTypeId"/>
+          <xs:element name="CustomsTypeUpdates" type="CustomsTypeUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CustomsTypeId" type="ams-datatypes:CustomsTypeId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CustomsTypeId" type="ams-datatypes:CustomsTypeId"/>
+          <xs:element name="CustomsTypeUpdates" type="CustomsTypeUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CustomsTypeInformation" type="ams-datatypes:CustomsTypeInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CustomsType" type="ams-datatypes:CustomsTypeInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CustomsTypeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="CustomsTypeId" type="ams-datatypes:CustomsTypeId" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RouteUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RouteUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="RouteId" type="ams-datatypes:RouteId"/>
+          <xs:element name="RouteUpdates" type="RouteUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="RouteDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="RouteId" type="ams-datatypes:RouteId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="RouteCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="RouteId" type="ams-datatypes:RouteId"/>
+          <xs:element name="RouteUpdates" type="RouteUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="RouteDeletedNotification">
+    <xs:sequence>
+      <xs:element name="RouteId" type="ams-datatypes:RouteId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RouteUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="RouteInformation" type="ams-datatypes:RouteInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RouteCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Route" type="ams-datatypes:RouteInformation" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name ="LinkedFlight">
+    <xs:sequence minOccurs="0" maxOccurs="1">
+      <xs:element name="AirlineDesignator" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="FlightNumber" type="xs:string"/>
+      <xs:element name="Offset" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CreateScheduledFlightsRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ScheduledFlightsId" type="ams-datatypes:ScheduledFlightsId"/>
+          <xs:element name="DOOP" type="ams-datatypes:DOOP" />
+          <xs:element name="FromDate" type="xs:date" />
+          <xs:element name="ToDate" type="xs:date" />
+          <xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="LinkedFlight" type="LinkedFlight" minOccurs="0" />
+          <xs:element name="FlightUpdates" type="FlightUpdateInformationExtended" minOccurs="1"/>
+          <xs:element name="OriginalMessage" type="xs:string" />
+          <xs:element name="AutoProcess" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateScheduledFlightsRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightKind" type="ams-datatypes:FlightKind" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="AirlineDesignator" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="FlightNumber" type="xs:string"/>
+          <xs:element name="DOOP" type="ams-datatypes:DOOP" />
+          <xs:element name="FromDate" type="xs:date" />
+          <xs:element name="ToDate" type="xs:date" />
+          <xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="LinkedFlight" type="LinkedFlight" minOccurs="0" />
+          <xs:element name="FlightUpdates" type="FlightUpdateInformationExtended" minOccurs="0" />
+          <xs:element name="OriginalMessage" type="xs:string" />
+          <xs:element name="AutoProcess" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteScheduledFlightsRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightKind" type="ams-datatypes:FlightKind" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="AirlineDesignator" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="FlightNumber" type="xs:string"/>
+          <xs:element name="DOOP" type="ams-datatypes:DOOP" />
+          <xs:element name="FromDate" type="xs:date" />
+          <xs:element name="ToDate" type="xs:date" />
+          <xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element name="OriginalMessage" type="xs:string" />
+          <xs:element name="AutoProcess" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UnrecognizedScheduledFlightsRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="OriginalMessage" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="ResourceUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StandUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="StandId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="StandUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="StandCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="StandId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="StandUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="StandUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Stand" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StandCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Stand" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StandDeletedNotification">
+    <xs:sequence>
+      <xs:element name="StandId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CarouselId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="CarouselUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CarouselId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="CarouselUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Carousel" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Carousel" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselDeletedNotification">
+    <xs:sequence>
+      <xs:element name="CarouselId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CheckInId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="CheckInUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CheckInId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="CheckInUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CheckIn" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CheckIn" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInDeletedNotification">
+    <xs:sequence>
+      <xs:element name="CheckInId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ChuteId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="ChuteUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ChuteId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="ChuteUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Chute" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Chute" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteDeletedNotification">
+    <xs:sequence>
+      <xs:element name="ChuteId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GateUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="GateId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="GateUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="GateCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="GateId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="GateUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="GateUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Gate" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GateCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Gate" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GateDeletedNotification">
+    <xs:sequence>
+      <xs:element name="GateId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="LoungeId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="LoungeUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="LoungeId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="LoungeUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Lounge" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Lounge" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="LoungeId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="VehicleId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="VehicleUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="VehicleId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="VehicleUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Vehicle" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Vehicle" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleDeletedNotification">
+    <xs:sequence>
+      <xs:element name="VehicleId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AreaUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ArrivalDeskUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ArrivalDeskId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="ArrivalDeskUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ArrivalDeskId" type="ams-datatypes:GlobalResourceId"/>
+          <xs:element name="ArrivalDeskUpdates" type="ResourceUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="ArrivalDesk" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskCreatedNotification">
+    <xs:sequence>
+      <xs:element name="ArrivalDesk" type="ams-datatypes:ResourceInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDeletedNotification">
+    <xs:sequence>
+      <xs:element name="ArrivalDeskId" type="ams-datatypes:GlobalResourceId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AreaUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AreaId" type="ams-datatypes:GlobalAreaId"/>
+          <xs:element name="AreaUpdates" type="AreaUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AreaCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AreaId" type="ams-datatypes:GlobalAreaId"/>
+          <xs:element name="AreaUpdates" type="AreaUpdateInformation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AreaDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="AreaId" type="ams-datatypes:GlobalAreaId"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AreaUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="Area" type="ams-datatypes:AreaInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AreaCreatedNotification">
+    <xs:sequence>
+      <xs:element name="Area" type="ams-datatypes:AreaInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AreaDeletedNotification">
+    <xs:sequence>
+      <xs:element name="AreaId" type="ams-datatypes:GlobalAreaId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonCheckInShapeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CommonCheckInShape" type="ams-datatypes:CommonCheckInShapeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonCheckInShapeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CommonCheckInShape" type="ams-datatypes:CommonCheckInShapeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonCheckInShapeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="CommonCheckInShapeId" type="ams-datatypes:CommonCheckInShapeId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CommonArrivalDeskShape" type="ams-datatypes:CommonArrivalDeskShapeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CommonArrivalDeskShape" type="ams-datatypes:CommonArrivalDeskShapeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="CommonArrivalDeskShapeId" type="ams-datatypes:CommonArrivalDeskShapeId"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CreateStandDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="StandDowngradeState" type="ams-datatypes:StandDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateStandDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="StandDowngradeState" type="ams-datatypes:StandDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteStandDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="StandDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="StandDowngrade" type="ams-datatypes:StandDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StandDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="StandDowngrade" type="ams-datatypes:StandDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StandDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+    <xs:complexType name="CreateChuteDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ChuteDowngradeState" type="ams-datatypes:ChuteDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateChuteDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="ChuteDowngradeState" type="ams-datatypes:ChuteDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteChuteDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="ChuteDowngrade" type="ams-datatypes:ChuteDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="ChuteDowngrade" type="ams-datatypes:ChuteDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+ <xs:complexType name="CreateCheckInDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CheckInDowngradeState" type="ams-datatypes:CheckInDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCheckInDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="CheckInDowngradeState" type="ams-datatypes:CheckInDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteCheckInDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>  
+    
+  <xs:complexType name="CheckInDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CheckInDowngrade" type="ams-datatypes:CheckInDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CheckInDowngrade" type="ams-datatypes:CheckInDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckInDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+ <xs:complexType name="CreateCarouselDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="CarouselDowngradeState" type="ams-datatypes:CarouselDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCarouselDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="CarouselDowngradeState" type="ams-datatypes:CarouselDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteCarouselDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>  
+    
+  <xs:complexType name="CarouselDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="CarouselDowngrade" type="ams-datatypes:CarouselDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="CarouselDowngrade" type="ams-datatypes:CarouselDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CarouselDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+   <xs:complexType name="CreateGateDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="GateDowngradeState" type="ams-datatypes:GateDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateGateDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="GateDowngradeState" type="ams-datatypes:GateDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteGateDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="GateDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="GateDowngrade" type="ams-datatypes:GateDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GateDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="GateDowngrade" type="ams-datatypes:GateDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GateDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+   <xs:complexType name="CreateLoungeDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="LoungeDowngradeState" type="ams-datatypes:LoungeDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateLoungeDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="LoungeDowngradeState" type="ams-datatypes:LoungeDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteLoungeDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="LoungeDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="LoungeDowngrade" type="ams-datatypes:LoungeDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="LoungeDowngrade" type="ams-datatypes:LoungeDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoungeDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+   <xs:complexType name="CreateVehicleDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="VehicleDowngradeState" type="ams-datatypes:VehicleDowngradeState" />
+    			<xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateVehicleDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="VehicleDowngradeState" type="ams-datatypes:VehicleDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteVehicleDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="VehicleDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="VehicleDowngrade" type="ams-datatypes:VehicleDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="VehicleDowngrade" type="ams-datatypes:VehicleDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VehicleDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CreateArrivalDeskDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="ArrivalDeskDowngradeState" type="ams-datatypes:ArrivalDeskDowngradeState" />
+          <xs:element name="AirportCode" type="ams-datatypes:LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateArrivalDeskDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+          <xs:element name="ArrivalDeskDowngradeState" type="ams-datatypes:ArrivalDeskDowngradeState" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeleteArrivalDeskDowngradesRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeCreatedNotification">
+    <xs:sequence>
+      <xs:element name="ArrivalDeskDowngrade" type="ams-datatypes:ArrivalDeskDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="ArrivalDeskDowngrade" type="ams-datatypes:ArrivalDeskDowngradeInformation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeDeletedNotification">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="ams-datatypes:DowngradeIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AssignFlightsRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="FlightStandAssignment" type="ams-datatypes:FlightStandAssignment" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="FlightCarouselAssignment" type="ams-datatypes:FlightCarouselAssignment" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="FlightChuteAssignment" type="ams-datatypes:FlightChuteAssignment" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SlotRequestCreateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestUpdates" type="SlotRequestUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestCreateInComplianceRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestUpdates" type="SlotRequestUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestUpdateRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestIdentifier" type="ams-datatypes:SlotRequestIdentifier" minOccurs="1"/>
+          <xs:element name="SlotRequestUpdates" type="SlotRequestUpdateInformation" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestSplitRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestIdentifier" type="ams-datatypes:SlotRequestIdentifier" minOccurs="1"/>
+          <xs:element name="SlotRequestUpdates" type="SlotRequestUpdateInformation" />
+          <xs:element name="SlotRequestCreates" type="ams-datatypes:SlotRequestCreatePropertiesCollection"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="SlotRequestUpdateStatusRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestIdentifier" type="ams-datatypes:SlotRequestIdentifier" minOccurs="1"/>
+          <xs:element name="SlotRequestStatus" type="xs:string" />
+          <xs:element name="SlotRequestStatusChangeComment" minOccurs ="0">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:maxLength value="1000"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestDeleteRequest">
+    <xs:complexContent>
+      <xs:extension base="ams-datatypes:ApiRequest">
+        <xs:sequence>
+          <xs:element name="SlotRequestIdentifier" type="ams-datatypes:SlotRequestIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestUpdateInformation">
+    <xs:sequence>
+      <xs:element name="Update" type="ams-datatypes:PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestCreatedNotification">
+    <xs:sequence>
+      <xs:element name="SlotRequest" type="ams-datatypes:SlotRequest" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestUpdatedNotification">
+    <xs:sequence>
+      <xs:element name="SlotRequest" type="ams-datatypes:SlotRequest" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestDeletedNotification">
+    <xs:sequence>
+      <xs:element name="SlotRequestIdentifier" type="ams-datatypes:SlotRequestIdentifier" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
