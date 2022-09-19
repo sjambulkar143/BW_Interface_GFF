@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<msv:DocumentRoot xmlns:msv="http://tns.tibco.com/bw/model/core/moduleSV">
+  <moduleSharedVariables>
+    <moduleSharedVariable name="State" type="{http://www.w3.org/2001/XMLSchema}string" initialValueMode="none" initialValue=""/>
+    <moduleSharedVariable name="SubscriptionCount" type="{http://www.w3.org/2001/XMLSchema}integer" initialValueMode="literal" initialValue="0"/>
+    <moduleSharedVariable name="SnapshotTime" type="{http://www.w3.org/2001/XMLSchema}dateTime" initialValueMode="none"/>
+    <moduleSharedVariable name="SnapshotFlag" type="{http://www.w3.org/2001/XMLSchema}string" initialValueMode="none"/>
+    <moduleSharedVariable name="Connected" type="{http://www.w3.org/2001/XMLSchema}boolean" initialValueMode="none"/>
+    <moduleSharedVariable name="HeartBeatCounter" type="{http://www.w3.org/2001/XMLSchema}integer" initialValueMode="literal" initialValue="0"/>
+    <moduleSharedVariable name="MsgTimeStamp" type="{http://www.w3.org/2001/XMLSchema}integer" initialValueMode="literal" initialValue="0"/>
+    <moduleSharedVariable name="ClientStatusCounter" type="{http://www.w3.org/2001/XMLSchema}integer" initialValueMode="none"/>
+    <moduleSharedVariable name="ConnectedTimestamp" type="{http://www.w3.org/2001/XMLSchema}integer" initialValueMode="none"/>
+  </moduleSharedVariables>
+</msv:DocumentRoot>

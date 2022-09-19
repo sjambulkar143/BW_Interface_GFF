@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://fcs2.changiairport.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="http://fcs2.changiairport.com" elementFormDefault="qualified" version="1.0" id="FCS2_1.0">
+		   
+    <xs:include schemaLocation="CAG_FCS2_TPA_CommonTypes.xsd" />
+
+    <xs:element name="Controls">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Provides additional controls information</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="SnapshotStart">
+                    <xs:annotation>
+                        <xs:documentation>To indicate snapshot download start.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="SnapshotEnd">
+                    <xs:annotation>
+                        <xs:documentation>To indicate snapshot download end.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="FlightLink">
+                    <xs:annotation>
+                        <xs:documentation>To indicate this message also have a flight link operation.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="FlightUnLink">
+                    <xs:annotation>
+                        <xs:documentation>To indicate this message also have a flight unlink operation</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FlightExtensions">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Provides additional flight field information</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IsFlightSnapshot" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation>Indicates whether this message a snapshot data</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

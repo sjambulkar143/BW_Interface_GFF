@@ -1,0 +1,1965 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	xmlns="http://www.sita.aero/ams6-xml-api-datatypes"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	targetNamespace="http://www.sita.aero/ams6-xml-api-datatypes"
+	elementFormDefault="qualified">
+
+	<xs:simpleType name="ApiVersion">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d+\.\d+"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ApiRequestId">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+  <xs:simpleType name="User">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="Timestamp">
+    <xs:restriction base="xs:dateTime" />
+  </xs:simpleType>
+
+	<xs:simpleType name="ResultStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Success"/>
+			<xs:enumeration value="Failure"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="ErrorInformation">
+		<xs:sequence>
+			<xs:element name="ErrorCode" type="xs:string"/>
+			<xs:element name="ErrorDescription" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ErrorCollection">
+		<xs:sequence>
+			<xs:element name="Error" type="ErrorInformation" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ApiRequest">
+		<xs:sequence>
+			<xs:element name="RequestId" type="ApiRequestId" minOccurs="0" />
+			<xs:element name="Token" type="LoginToken" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ApiResponse">
+		<xs:sequence>
+			<xs:element name="RequestId" type="ApiRequestId" minOccurs="0" />      
+			<xs:element name="Status" type="ResultStatus" />
+			<xs:element name="Data" type="ResultDataTypes" minOccurs="0" />
+			<xs:element name="Errors" type="ErrorCollection" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="CodeContext">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ICAO"/>
+			<xs:enumeration value="IATA"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FlightKind">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Arrival"/>
+			<xs:enumeration value="Departure"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CustomFieldType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Boolean"/>
+			<xs:enumeration value="Double"/>
+			<xs:enumeration value="Integer"/>
+			<xs:enumeration value="String"/>
+			<xs:enumeration value="DateTime"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CustomFieldLookupValue">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:simpleType name="DOOP">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[.1][.2][.3][.4][.5][.6][.7]" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TimeOfDay">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-2][0-9]:[0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="CustomFieldLookupGroup">
+		<xs:sequence>
+			<xs:element name="LookupValue" type="CustomFieldLookupValue" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomFieldInformation">
+		<xs:sequence>
+			<xs:element name="CustomFieldType" type="CustomFieldType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="DefaultValue" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DisplayName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ExternalReference" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="IsSoftLookup" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="LookupGroup" type="CustomFieldLookupGroup" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomFieldsCollection">
+		<xs:sequence>
+			<xs:element name="CustomField" type="CustomFieldInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="LookupCode">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="codeContext" type="CodeContext" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="FlightId">
+		<xs:sequence>
+			<xs:element name="FlightKind" type="FlightKind"/>
+			<xs:element name="AirlineDesignator" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="FlightNumber" type="xs:string"/>
+			<xs:element name="ScheduledDate" type="xs:date"/>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LinkedFlightInformation">
+		<xs:sequence>
+			<xs:element name="FlightId" type="FlightId"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ScheduledFlightsId">
+		<xs:sequence>
+			<xs:element name="FlightKind" type="FlightKind"/>
+			<xs:element name="AirlineDesignator" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="FlightNumber" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PropertyValue">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="propertyName" type="xs:string" use="required"/>
+				<xs:attribute name="codeContext" type="CodeContext" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="TablePropertyValue">
+		<xs:sequence>
+			<xs:element name="Row" type="TableRow" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="propertyName" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="TableValueUpdate">
+		<xs:sequence>
+			<xs:element name="Row" type="TableRow" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="propertyName" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="TableRow">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="propertyName" type="xs:string" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeId">
+		<xs:sequence>
+			<xs:element name="AircraftTypeCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftType">
+		<xs:sequence>
+			<xs:element name="AircraftTypeId" type="AircraftTypeId"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftId">
+		<xs:sequence>
+			<xs:element name="Registration" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Aircraft">
+		<xs:sequence>
+			<xs:element name="AircraftId" type="AircraftId"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirportId">
+		<xs:sequence>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirlineId">
+		<xs:sequence>
+			<xs:element name="AirlineCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteViaPoint">
+		<xs:sequence>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="sequenceNumber" type="xs:int" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="Route">
+		<xs:sequence>
+			<xs:element name="ViaPoints">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RouteViaPoint" type="RouteViaPoint" minOccurs="1" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="customsType" type="xs:string" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="RouteId">
+		<xs:sequence>
+			<xs:element name="ViaPoints">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RouteViaPoint" type="RouteViaPoint" minOccurs="1" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PropertyChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="xs:string" />
+			<xs:element name="NewValue" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="propertyName" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="TableValueChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="TablePropertyValue" />
+			<xs:element name="NewValue" type="TablePropertyValue" />
+		</xs:sequence>
+		<xs:attribute name="propertyName" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="ScheduledTimeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="xs:dateTime" />
+			<xs:element name="NewValue" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AircraftType" type="AircraftType" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AircraftType" type="AircraftType" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Aircraft" type="Aircraft" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Aircraft" type="Aircraft" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Route" type="Route" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Route" type="Route" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LinkedFlightChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="LinkedFlight" type="LinkedFlightInformation" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="LinkedFlight" type="LinkedFlightInformation" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsType">
+		<xs:sequence>
+			<xs:element name="CustomsTypeId" type="CustomsTypeId"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsTypeId">
+		<xs:sequence>
+			<xs:element name="CustomsTypeCode" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsTypeChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CustomsType" type="CustomsType" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CustomsType" type="CustomsType" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Activity">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="ActivityChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="ActivityAdded">
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="ActivityRemoved">
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="ActivityUpdate">
+		<xs:sequence>
+			<xs:element name="Update" type="PropertyValue" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="Event">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="EventChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="EventAdded">
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="EventRemoved">
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="EventUpdate">
+		<xs:sequence>
+			<xs:element name="Update" type="PropertyValue" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required"/>
+	</xs:complexType>
+
+
+	<xs:complexType name="Area">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Resource">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="Area" type="Area" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Slot">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StandResourceCollection">
+		<xs:sequence>
+			<xs:element name="Stand" type="StandResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Stand" type="StandResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StandSlots">
+		<xs:sequence>
+			<xs:element name="StandSlot" type="StandSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="StandSlots" />
+			<xs:element name="NewValue" type="StandSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="CarouselResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselResourceCollection">
+		<xs:sequence>
+			<xs:element name="Carousel" type="CarouselResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Carousel" type="CarouselResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselSlots">
+		<xs:sequence>
+			<xs:element name="CarouselSlot" type="CarouselSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="CarouselSlots" />
+			<xs:element name="NewValue" type="CarouselSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="GateResourceCollection">
+		<xs:sequence>
+			<xs:element name="Gate" type="GateResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Gate" type="GateResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="GateSlots">
+		<xs:sequence>
+			<xs:element name="GateSlot" type="GateSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="GateSlots" />
+			<xs:element name="NewValue" type="GateSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeResourceCollection">
+		<xs:sequence>
+			<xs:element name="Lounge" type="LoungeResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Lounge" type="LoungeResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeSlots">
+		<xs:sequence>
+			<xs:element name="LoungeSlot" type="LoungeSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="LoungeSlots" />
+			<xs:element name="NewValue" type="LoungeSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleResourceCollection">
+		<xs:sequence>
+			<xs:element name="Vehicle" type="VehicleResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Vehicle" type="VehicleResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleSlots">
+		<xs:sequence>
+			<xs:element name="VehicleSlot" type="VehicleSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="VehicleSlots" />
+			<xs:element name="NewValue" type="VehicleSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInResourceCollection">
+		<xs:sequence>
+			<xs:element name="CheckIn" type="CheckInResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="CheckIn" type="CheckInResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInSlots">
+		<xs:sequence>
+			<xs:element name="CheckInSlot" type="CheckInSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+  <xs:complexType name="CheckInSlotsChange">
+    <xs:sequence>
+      <xs:element name="OldValue" type="CheckInSlots" />
+      <xs:element name="NewValue" type="CheckInSlots" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskResource">
+    <xs:complexContent>
+      <xs:extension base="Resource"></xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskResourceCollection">
+    <xs:sequence>
+      <xs:element name="ArrivalDesk" type="ArrivalDeskResource" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskSlot">
+    <xs:complexContent>
+      <xs:extension base="Slot">
+        <xs:sequence>
+          <xs:element name="ArrivalDesk" type="ArrivalDeskResource" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskSlots">
+    <xs:sequence>
+      <xs:element name="ArrivalDeskSlot" type="ArrivalDeskSlot" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskSlotsChange">
+    <xs:sequence>
+      <xs:element name="OldValue" type="ArrivalDeskSlots" />
+      <xs:element name="NewValue" type="ArrivalDeskSlots" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteResource">
+		<xs:complexContent>
+			<xs:extension base="Resource"></xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteResourceCollection">
+		<xs:sequence>
+			<xs:element name="Chute" type="ChuteResource" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteSlot">
+		<xs:complexContent>
+			<xs:extension base="Slot">
+				<xs:sequence>
+					<xs:element name="Chute" type="ChuteResource" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteSlots">
+		<xs:sequence>
+			<xs:element name="ChuteSlot" type="ChuteSlot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="ChuteSlots" />
+			<xs:element name="NewValue" type="ChuteSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="CodeShareFlightIdentifier">
+    <xs:sequence>
+      <xs:element name="AirlineDesignator" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="FlightNumber" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CodeShares">
+    <xs:sequence>
+      <xs:element name="CodeShare" type="CodeShareFlightIdentifier" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CodeSharesChange">
+    <xs:sequence>
+      <xs:element name="OldValue" type="CodeShares" />
+      <xs:element name="NewValue" type="CodeShares" />
+    </xs:sequence>
+  </xs:complexType>
+
+
+	<xs:complexType name="FlightStateInformation">
+		<xs:sequence>
+			<xs:element name="ScheduledTime" type="xs:dateTime" />
+			<xs:element name="LinkedFlight" type="LinkedFlightInformation" minOccurs="0"/>
+			<xs:element name="AircraftType" type="AircraftType" minOccurs="0" />
+			<xs:element name="Aircraft" type="Aircraft" minOccurs="0" />
+			<xs:element name="Route" type="Route" minOccurs="0" />
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="TableValue" type="TablePropertyValue" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="CodeShares" type="CodeShares" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Activity" type="Activity" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="Event" type="Event" minOccurs="0" maxOccurs="unbounded" />
+
+			<xs:element name="StandSlots" type="StandSlots" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CarouselSlots" type="CarouselSlots" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="GateSlots" type="GateSlots" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="LoungeSlots" type="LoungeSlots" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VehicleSlots" type="VehicleSlots" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="CheckInSlots" type="CheckInSlots" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ArrivalDeskSlots" type="ArrivalDeskSlots" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ChuteSlots" type="ChuteSlots" minOccurs="0" maxOccurs="1"/>
+     
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightChangeInformation">
+		<xs:sequence>
+			<xs:element name="ScheduledTimeChange" type="ScheduledTimeChange" minOccurs="0"/>
+			<xs:element name="LinkedFlightChange" type="LinkedFlightChange" minOccurs="0"/>
+			<xs:element name="AircraftTypeChange" type="AircraftTypeChange" minOccurs="0" />
+			<xs:element name="AircraftChange" type="AircraftChange" minOccurs="0" />
+			<xs:element name="RouteChange" type="RouteChange" minOccurs="0" />
+
+			<xs:element name="TableValueChange" type="TableValueChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="CodeSharesChange" type="CodeSharesChange" minOccurs="0" maxOccurs="1"/>
+
+      <xs:element name="ActivityAdded" type="ActivityAdded" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ActivityChange" type="ActivityChange" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ActivityRemoved" type="ActivityRemoved" minOccurs="0" maxOccurs="unbounded"/>
+
+			<xs:element name="EventAdded" type="EventAdded" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EventChange" type="EventChange" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EventRemoved" type="EventRemoved" minOccurs="0" maxOccurs="unbounded"/>
+
+			<xs:element name="StandSlotsChange" type="StandSlotsChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CarouselSlotsChange" type="CarouselSlotsChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="GateSlotsChange" type="GateSlotsChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="LoungeSlotsChange" type="LoungeSlotsChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="VehicleSlotsChange" type="VehicleSlotsChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="CheckInSlotsChange" type="CheckInSlotsChange" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ArrivalDeskSlotsChange" type="ArrivalDeskSlotsChange" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ChuteSlotsChange" type="ChuteSlotsChange" minOccurs="0" maxOccurs="1"/>
+      
+		</xs:sequence>
+	</xs:complexType>
+
+  
+
+  <xs:complexType name="Flight">
+		<xs:sequence>
+      <xs:element name="DataVersion" type="xs:int"/>
+			<xs:element name="FlightId" type="FlightId"/>
+			<xs:element name="FlightState" type="FlightStateInformation" />
+			<xs:element name="FlightChanges" type="FlightChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightCollection">
+		<xs:sequence>
+			<xs:element name="Flight" type="Flight" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightIdentifierChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FlightIdentifier" type="FlightId" minOccurs="0" maxOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FlightIdentifier" type="FlightId" minOccurs="0" maxOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MovementStateInformation">
+		<xs:sequence>
+			<xs:element name="ArrivalFlightId" type="FlightId" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DepartureFlightId" type="FlightId" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MovementChangeInformation">
+		<xs:sequence>
+			<xs:element name="ArrivalFlightIdChange" type="FlightIdentifierChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DepartureFlightIdChange" type="FlightIdentifierChange" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Movement">
+		<xs:sequence>
+		  <xs:element name="DataVersion" type="xs:int"/>
+			<xs:element name="ArrivalFlight" type="Flight" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="DepartureFlight" type="Flight" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="MovementState" type="MovementStateInformation"/>
+			<xs:element name="MovementChanges" type="MovementChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MovementCollection">
+		<xs:sequence>
+			<xs:element name="Movement" type="Movement" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirportStateInformation">
+		<xs:sequence>
+			<xs:element name="CustomsType" type="CustomsType" minOccurs="0"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirportChangeInformation">
+		<xs:sequence>
+			<xs:element name="CustomsTypeChange" type="CustomsTypeChange" minOccurs="0" />
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirportInformation">
+		<xs:sequence>
+			<xs:element name="AirportId" type="AirportId"/>
+			<xs:element name="AirportState" type="AirportStateInformation" />
+			<xs:element name="AirportChanges" type="AirportChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirportCollection">
+		<xs:sequence>
+			<xs:element name="Airport" type="AirportInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftStateInformation">
+		<xs:sequence>
+			<xs:element name="AircraftType" type="AircraftType" minOccurs="0"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeCollection">
+		<xs:sequence>
+			<xs:element name="AircraftType" type="AircraftTypeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AircraftChangeInformation">
+		<xs:sequence>
+			<xs:element name="AircraftTypeChange" type="AircraftTypeChange" minOccurs="0" />
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftInformation">
+		<xs:sequence>
+			<xs:element name="AircraftId" type="AircraftId"/>
+			<xs:element name="AircraftState" type="AircraftStateInformation" />
+			<xs:element name="AircraftChanges" type="AircraftChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftCollection">
+		<xs:sequence>
+			<xs:element name="Aircraft" type="AircraftInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeStateInformation">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeChangeInformation">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AircraftTypeInformation">
+		<xs:sequence>
+			<xs:element name="AircraftTypeId" type="AircraftTypeId"/>
+			<xs:element name="AircraftTypeState" type="AircraftTypeStateInformation" />
+			<xs:element name="AircraftTypeChanges" type="AircraftTypeChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirlineStateInformation">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirlineChangeInformation">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirlineInformation">
+		<xs:sequence>
+			<xs:element name="AirlineId" type="AirlineId"/>
+			<xs:element name="AirlineState" type="AirlineStateInformation" />
+			<xs:element name="AirlineChanges" type="AirlineChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AirlineCollection">
+		<xs:sequence>
+			<xs:element name="Airline" type="AirlineInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomsTypeStateInformation">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsTypeChangeInformation">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsTypeInformation">
+		<xs:sequence>
+			<xs:element name="CustomsTypeId" type="CustomsTypeId"/>
+			<xs:element name="CustomsTypeState" type="CustomsTypeStateInformation" />
+			<xs:element name="CustomsTypeChanges" type="CustomsTypeChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CustomsTypeCollection">
+		<xs:sequence>
+			<xs:element name="CustomsType" type="CustomsTypeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteStateInformation">
+		<xs:sequence>
+			<xs:element name="CustomsType" type="CustomsType" minOccurs="0"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteChangeInformation">
+		<xs:sequence>
+			<xs:element name="CustomsTypeChange" type="CustomsTypeChange" minOccurs="0"/>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteInformation">
+		<xs:sequence>
+			<xs:element name="RouteId" type="RouteId"/>
+			<xs:element name="RouteState" type="RouteStateInformation" />
+			<xs:element name="RouteChanges" type="RouteChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="RouteCollection">
+		<xs:sequence>
+			<xs:element name="Route" type="RouteInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<!-- Resources -->
+
+	<xs:complexType name="StandInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StandCollection">
+		<xs:sequence>
+			<xs:element name="Stand" type="StandInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="CarouselCollection">
+		<xs:sequence>
+			<xs:element name="Carousel" type="CarouselInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInCollection">
+		<xs:sequence>
+			<xs:element name="CheckIn" type="CheckInInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="ArrivalDeskInformation">
+    <xs:complexContent>
+      <xs:extension base="ResourceInformation"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskCollection">
+    <xs:sequence>
+      <xs:element name="ArrivalDesk" type="ArrivalDeskInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChuteInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteCollection">
+		<xs:sequence>
+			<xs:element name="Chute" type="ChuteInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="GateCollection">
+		<xs:sequence>
+			<xs:element name="Gate" type="GateInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeCollection">
+		<xs:sequence>
+			<xs:element name="Lounge" type="LoungeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleInformation">
+		<xs:complexContent>
+			<xs:extension base="ResourceInformation"/>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleCollection">
+		<xs:sequence>
+			<xs:element name="Vehicle" type="VehicleInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceInformation">
+		<xs:sequence>
+			<xs:element name="ResourceId" type="GlobalResourceId"/>
+			<xs:element name="ResourceState" type="ResourceState"/>
+			<xs:element name="ResourceChange" type="ResourceChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AreaStateInformation">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AreaChangeInformation">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AreaInformation">
+		<xs:sequence>
+			<xs:element name="AreaId" type="GlobalAreaId"/>
+			<xs:element name="AreaState" type="AreaStateInformation"/>
+			<xs:element name="AreaChange" type="AreaChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AreaCollection">
+		<xs:sequence>
+			<xs:element name="Area" type="AreaInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AreaId">
+		<xs:sequence>
+			<xs:element name="ExternalName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GlobalAreaId">
+		<xs:sequence>
+			<xs:element name="ExternalName" type="xs:string"/>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceId">
+		<xs:sequence>
+			<xs:element name="ExternalName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GlobalResourceId">
+		<xs:sequence>
+			<xs:element name="ExternalName" type="xs:string"/>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceArea">
+		<xs:sequence>
+			<xs:element name="AreaId" type="AreaId"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="Area" type="ResourceArea"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="AreaChange" type="ResourceAreaChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ResourceAreaChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Area" type="ResourceArea"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Area" type="ResourceArea"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightStandAssignment">
+		<xs:sequence>
+			<xs:element name="FlightId" type="FlightId" />
+			<xs:element name="ResourceId" type="ResourceId" minOccurs="0" maxOccurs="1"  />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FlightCarouselAssignment">
+		<xs:sequence>
+			<xs:element name="FlightId" type="FlightId" />
+			<xs:element name="ResourceId" type="ResourceId" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="carouselIndex" type="xs:int" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="FlightChuteAssignment">
+		<xs:sequence>
+			<xs:element name="FlightId" type="FlightId" />
+			<xs:element name="ResourceId" type="ResourceId" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="chuteIndex" type="xs:int" use="optional"/>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeInformation">
+		<xs:sequence>
+			<xs:element name="CommonCheckInShapeId" type="CommonCheckInShapeId"/>
+			<xs:element name="CommonCheckInShapeState" type="CommonCheckInShapeState"/>
+			<xs:element name="CommonCheckInShapeChange" type="CommonCheckInShapeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeCollection">
+		<xs:sequence>
+			<xs:element name="CommonCheckInShape" type="CommonCheckInShapeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeState">
+		<xs:sequence>
+			<xs:element name="Slots" type ="CheckInSlots"/>
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeChange">
+		<xs:sequence>
+			<xs:element name="SlotsChange" type="CommonCheckInShapeSlotsChange" />
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeId">
+		<xs:sequence>
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="ShapeId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommonCheckInShapeSlotsChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="CheckInSlots" />
+			<xs:element name="NewValue" type="CheckInSlots" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeInformation">
+    <xs:sequence>
+      <xs:element name="CommonArrivalDeskShapeId" type="CommonArrivalDeskShapeId"/>
+      <xs:element name="CommonArrivalDeskShapeState" type="CommonArrivalDeskShapeState"/>
+      <xs:element name="CommonArrivalDeskShapeChange" type="CommonArrivalDeskShapeChange" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeCollection">
+    <xs:sequence>
+      <xs:element name="CommonArrivalDeskShape" type="CommonArrivalDeskShapeInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeState">
+    <xs:sequence>
+      <xs:element name="Slots" type ="ArrivalDeskSlots"/>
+      <xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeChange">
+    <xs:sequence>
+      <xs:element name="SlotsChange" type="CommonArrivalDeskShapeSlotsChange" />
+      <xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeId">
+    <xs:sequence>
+      <xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="ShapeId" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CommonArrivalDeskShapeSlotsChange">
+    <xs:sequence>
+      <xs:element name="OldValue" type="ArrivalDeskSlots" />
+      <xs:element name="NewValue" type="ArrivalDeskSlots" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DowngradeIdentifier">
+		<xs:sequence>
+			<xs:element name="DowngradeUniqueId" type="xs:string" />
+			<xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandsDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="StandResourceCollection" />
+			<xs:element name="NewValue" type="StandResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Stands" type="StandResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="StandsChange" type="StandsDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="StandDowngradeState" type="StandDowngradeState"/>
+			<xs:element name="StandDowngradeChange" type="StandDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StandDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="StandDowngrade" type="StandDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselsDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="CarouselResourceCollection" />
+			<xs:element name="NewValue" type="CarouselResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Carousels" type="CarouselResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="CarouselsChange" type="CarouselsDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="CarouselDowngradeState" type="CarouselDowngradeState"/>
+			<xs:element name="CarouselDowngradeChange" type="CarouselDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CarouselDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="CarouselDowngrade" type="CarouselDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInsDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="CheckInResourceCollection" />
+			<xs:element name="NewValue" type="CheckInResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="CheckIns" type="CheckInResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="CheckInsChange" type="CheckInsDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="CheckInDowngradeState" type="CheckInDowngradeState"/>
+			<xs:element name="CheckInDowngradeChange" type="CheckInDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CheckInDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="CheckInDowngrade" type="CheckInDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="ArrivalDesksDowngradeChange">
+    <xs:sequence>
+      <xs:element name="OldValue" type="ArrivalDeskResourceCollection" />
+      <xs:element name="NewValue" type="ArrivalDeskResourceCollection" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeState">
+    <xs:sequence>
+      <xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="ArrivalDesks" type="ArrivalDeskResourceCollection" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeChange">
+    <xs:sequence>
+      <xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="ArrivalDesksChange" type="ArrivalDesksDowngradeChange" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeInformation">
+    <xs:sequence>
+      <xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+      <xs:element name="ArrivalDeskDowngradeState" type="ArrivalDeskDowngradeState"/>
+      <xs:element name="ArrivalDeskDowngradeChange" type="ArrivalDeskDowngradeChange" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ArrivalDeskDowngradeCollection">
+    <xs:sequence>
+      <xs:element name="ArrivalDeskDowngrade" type="ArrivalDeskDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChutesDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="ChuteResourceCollection" />
+			<xs:element name="NewValue" type="ChuteResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Chutes" type="ChuteResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="ChutesChange" type="ChutesDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="ChuteDowngradeState" type="ChuteDowngradeState"/>
+			<xs:element name="ChuteDowngradeChange" type="ChuteDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ChuteDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="ChuteDowngrade" type="ChuteDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GatesDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="GateResourceCollection" />
+			<xs:element name="NewValue" type="GateResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Gates" type="GateResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="GatesChange" type="GatesDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="GateDowngradeState" type="GateDowngradeState"/>
+			<xs:element name="GateDowngradeChange" type="GateDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GateDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="GateDowngrade" type="GateDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungesDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="LoungeResourceCollection" />
+			<xs:element name="NewValue" type="LoungeResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Lounges" type="LoungeResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="LoungesChange" type="LoungesDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="LoungeDowngradeState" type="LoungeDowngradeState"/>
+			<xs:element name="LoungeDowngradeChange" type="LoungeDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LoungeDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="LoungeDowngrade" type="LoungeDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehiclesDowngradeChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="VehicleResourceCollection" />
+			<xs:element name="NewValue" type="VehicleResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleDowngradeState">
+		<xs:sequence>
+			<xs:element name="Value" type="PropertyValue" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="Vehicles" type="VehicleResourceCollection" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleDowngradeChange">
+		<xs:sequence>
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="VehiclesChange" type="VehiclesDowngradeChange" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleDowngradeInformation">
+		<xs:sequence>
+			<xs:element name="DowngradeIdentifier" type="DowngradeIdentifier"/>
+			<xs:element name="VehicleDowngradeState" type="VehicleDowngradeState"/>
+			<xs:element name="VehicleDowngradeChange" type="VehicleDowngradeChange" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VehicleDowngradeCollection">
+		<xs:sequence>
+			<xs:element name="VehicleDowngrade" type="VehicleDowngradeInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SlotRequestIdentifier">
+		<xs:sequence>
+			<xs:element name="SlotRequestUniqueId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+  <xs:complexType name="SlotRequestCreateProperties">
+    <xs:sequence>
+      <xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SlotRequestCreatePropertiesCollection">
+    <xs:sequence>
+      <xs:element name="SlotRequestCreateProperties" type="SlotRequestCreateProperties" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+	<xs:complexType name="SlotRequestSchedule">
+		<xs:sequence>
+			<xs:element name="FromDate" type="xs:date" />
+			<xs:element name="ToDate" type="xs:date" />
+			<xs:element name="DOOP" type="DOOP" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequestFlight">
+		<xs:sequence>
+			<xs:element name="AirlineDesignator" type="LookupCode" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="FlightNumber" type="xs:string"/>
+			<xs:element name="ScheduledTime" type="TimeWithOffset" />
+			<xs:element name="OfferedScheduledTime" type="TimeWithOffset" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TimeWithOffset">
+		<xs:simpleContent>
+			<xs:extension base="TimeOfDay">
+				<xs:attribute name="Offset" type="xs:integer" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="ArrivalSlotRequestFlight">
+		<xs:complexContent>
+			<xs:extension base="SlotRequestFlight">
+				<xs:sequence>
+					<xs:element name="Route" type="Route" minOccurs="1" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="DepartureSlotRequestFlight">
+		<xs:complexContent>
+			<xs:extension base="SlotRequestFlight">
+				<xs:sequence>
+					<xs:element name="Route" type="Route" minOccurs="1" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequestInformation">
+		<xs:sequence>
+			<xs:element name="SlotRequestIdentifier" type="SlotRequestIdentifier"/>
+			<xs:element name="SlotRequestStatus" type="xs:string"/>
+			<xs:element name="AircraftType" type="AircraftType"/>
+			<xs:element name="AirportIdentifier" type="AirportId"/>
+
+			<xs:element name="Schedule" type="SlotRequestSchedule"/>
+
+			<xs:element name="Arrival" type="ArrivalSlotRequestFlight" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Departure" type="DepartureSlotRequestFlight" minOccurs="0" maxOccurs="1" />
+			<xs:element name="Value" type="PropertyValue" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequestCollection">
+		<xs:sequence>
+			<xs:element name="SlotRequest" type="SlotRequestInformation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotStatusChange">
+		<xs:sequence>
+			<xs:element name="ChangeTime" type="xs:dateTime" />
+			<xs:element name="NewStatusCode" type="xs:string"/>
+			<xs:element name="Comment" type="xs:string" />
+			<xs:element name="User" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequestStatusHistory">
+		<xs:sequence>
+			<xs:element name="SlotRequestIdentifier" type="SlotRequestIdentifier" minOccurs="0" maxOccurs="1" />
+			<xs:element name="StatusChange" type="SlotStatusChange" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequest">
+		<xs:sequence>
+			<xs:element name="SlotRequestState" type="SlotRequestInformation"/>
+			<xs:element name="SlotRequestChanges" type="SlotRequestChangeInformation" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="SlotRequestChangeInformation">
+		<xs:sequence>
+			<xs:element name="SlotRequestStatusChange" type="SlotRequestStatusChange" minOccurs="0" maxOccurs="1" />
+			<xs:element name="AircraftTypeChange" type="AircraftTypeChange" minOccurs="0" maxOccurs="1" />
+
+			<xs:element name="ScheduleChange" type="SlotRequestScheduleChange" minOccurs="0" maxOccurs="1"/>
+
+			<xs:element name="ArrivalChange" type="ArrivalSlotRequestFlightChange" minOccurs="0" maxOccurs="1" />
+			<xs:element name="DepartureChange" type="DepartureSlotRequestFlightChange" minOccurs="0" maxOccurs="1" />
+
+			<xs:element name="Change" type="PropertyChange" minOccurs="0" maxOccurs="unbounded" />
+
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="SlotRequestStatusChange">
+		<xs:sequence>
+			<xs:element name="OldValue" type="xs:string" />
+			<xs:element name="NewValue" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SlotRequestScheduleChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SlotRequestSchedule" type="SlotRequestSchedule" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SlotRequestSchedule" type="SlotRequestSchedule" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ArrivalSlotRequestFlightChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ArrivalSlotRequestFlight" type="ArrivalSlotRequestFlight" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ArrivalSlotRequestFlight" type="ArrivalSlotRequestFlight" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DepartureSlotRequestFlightChange">
+		<xs:sequence>
+			<xs:element name="OldValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DepartureSlotRequestFlight" type="DepartureSlotRequestFlight" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NewValue">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="DepartureSlotRequestFlight" type="DepartureSlotRequestFlight" minOccurs="0" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="LoginToken">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="UserRole">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+  <xs:complexType name="UserRoleCollection">
+    <xs:sequence>
+      <xs:element name="UserRole" type="UserRole" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DowngradeType">
+    <xs:sequence>
+      <xs:element name="Type" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DowngradeTypeCollection">
+    <xs:sequence>
+      <xs:element name="DowngradeType" type="DowngradeType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LoginData">
+		<xs:sequence>
+			<xs:element name="Token" type="LoginToken" />
+		</xs:sequence>
+	</xs:complexType>
+  
+  <xs:simpleType name="AccessRight">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AccessRightCollection">
+    <xs:sequence>
+      <xs:element name="AccessRight" type="AccessRight" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AirportAccessRight">
+    <xs:sequence>
+      <xs:element name="AirportCode" type="LookupCode" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="AccessRights" type="AccessRightCollection" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UserWebAccessRightCollection">
+    <xs:sequence>
+      <xs:element name="Airport" type="AirportAccessRight" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EventDefinitionCollection">
+    <xs:sequence>
+      <xs:element name="EventDefinition" type="EventDefinitionInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EventDefinitionInformation">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Nature" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Code" type="xs:string" minOccurs="1" maxOccurs="1"/>      
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ActivityDefinitionCollection">
+    <xs:sequence>
+      <xs:element name="ActivityDefinition" type="ActivityDefinitionInformation" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ActivityDefinitionInformation">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Nature" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Code" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResultDataTypes">
+		<xs:choice>
+			<xs:element name="LoginData" type="LoginData" />
+      <xs:element name="UserRoles" type="UserRoleCollection"/>
+      <xs:element name="DowngradeTypes" type="DowngradeTypeCollection"/>
+      <xs:element name="UserWebAccessRights" type="UserWebAccessRightCollection"/>
+      <xs:element name="Movements" type="MovementCollection"/>
+			<xs:element name="Flights" type="FlightCollection" />
+			<xs:element name="AircraftTypes" type="AircraftTypeCollection" />
+			<xs:element name="Airports" type="AirportCollection" />
+			<xs:element name="AircraftList" type="AircraftCollection" />
+			<xs:element name="Airlines" type="AirlineCollection" />
+			<xs:element name="CustomsTypes" type="CustomsTypeCollection" />
+			<xs:element name="Routes" type="RouteCollection" />
+			<xs:element name="CustomFields" type="CustomFieldsCollection" />
+			<xs:element name="Stands" type="StandCollection" />
+			<xs:element name="Chutes" type="ChuteCollection" />
+			<xs:element name="CheckIns" type="CheckInCollection" />
+			<xs:element name="Carousels" type="CarouselCollection" />
+			<xs:element name="Gates" type="GateCollection" />
+			<xs:element name="Lounges" type="LoungeCollection" />
+      <xs:element name="Vehicles" type="VehicleCollection" />
+      <xs:element name="ArrivalDesks" type="ArrivalDeskCollection" />
+      <xs:element name="CommonCheckInShapes" type="CommonCheckInShapeCollection" />
+      <xs:element name="CommonArrivalDeskShapes" type="CommonArrivalDeskShapeCollection" />
+			<xs:element name="Areas" type="AreaCollection" />
+			<xs:element name="StandDowngrades" type="StandDowngradeCollection" />
+			<xs:element name="CarouselDowngrades" type="CarouselDowngradeCollection" />
+      <xs:element name="CheckInDowngrades" type="CheckInDowngradeCollection" />
+      <xs:element name="ArrivalDeskDowngrades" type="ArrivalDeskDowngradeCollection" />
+			<xs:element name="ChuteDowngrades" type="ChuteDowngradeCollection" />
+			<xs:element name="GateDowngrades" type="GateDowngradeCollection" />
+			<xs:element name="LoungeDowngrades" type="LoungeDowngradeCollection" />
+			<xs:element name="VehicleDowngrades" type="VehicleDowngradeCollection" />
+			<xs:element name="SlotRequests" type="SlotRequestCollection" />
+			<xs:element name="SlotRequestIdentifier" type="SlotRequestIdentifier" />
+			<xs:element name="SlotRequestStatusHistory" type="SlotRequestStatusHistory" />      
+      <xs:element name="ActivityDefinitons" type="ActivityDefinitionCollection" />
+      <xs:element name="EventDefinitons" type="EventDefinitionCollection" />
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

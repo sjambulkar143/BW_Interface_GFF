@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://fcs2.changiairport.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fcs2.changiairport.com" elementFormDefault="qualified" version="1.0" id="FCS2_1.0">
+    <xs:attributeGroup name="FCS2_PayloadStdAttributes">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">The FCS2_PayloadStdAttributes defines the standard attributes that appear on the root element for all FCS2 payloads.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="TimeStamp" type="xs:dateTime" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en">Indicates the creation date and time of the message in UTC using the following format specified by ISO 8601; YYYY-MM-DDThh:mm:ssZ with time values using the 24 hour clock (e.g. 20 November 2003, 1:59:38 pm UTC becomes 2003-11-20T13:59:38Z).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="Version" type="xs:decimal" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en">For all FCS2 versioned messages, the version of the message is indicated by a decimal value.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="SequenceNmbr" use="required">
+            <xs:annotation>
+                <xs:documentation xml:lang="en">Used to identify the sequence number of the transaction as assigned by the sending system; allows for an application to process messages in a certain order or to request a resynchronization of messages in the event that a system has been off-line and needs to retrieve messages that were missed. </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:nonNegativeInteger">
+                    <xs:minInclusive value="0"/>
+                    <xs:maxInclusive value="999999"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:simpleType name="FlightLegWindow">
+        <xs:annotation>
+            <xs:documentation>The active flight leg window that can be requested by a
+                client (D-1 to D+2).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="D+0" />
+            <xs:enumeration value="D+1" />
+            <xs:enumeration value="D+2" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SubscriptionMode">
+        <xs:annotation>
+            <xs:documentation>The type of subscription required (SnapshotOnly,
+                SnapshotThenUpdates, UpdatesOnly).</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SnapshotThenUpdates" />
+            <xs:enumeration value="UpdatesOnly" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="StatusRequest">
+        <xs:annotation>
+            <xs:documentation>Sent by client to request status of the Gateway service. This message may be sent by the client at any time, whether or not it has subscribed.</xs:documentation>
+        </xs:annotation>
+    </xs:complexType>
+    <xs:complexType name="StatusResponse">
+        <xs:annotation>
+            <xs:documentation>Contains the current status of the Gateway service. Sent by the service provider to a client in response to an StatusRequest message.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ServiceStatus" type="ServiceStatus" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubscriptionRequest">
+        <xs:annotation>
+            <xs:documentation>Sent by a client subscriber to request the service provider to begin providing data according to the specified parameters.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice>
+                <xs:sequence>
+                    <xs:element name="FlightLegWindow" type="FlightLegWindow" nillable="false"/>
+                    <xs:element name="SubscriptionMode" type="SubscriptionMode" nillable="false"/>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubscriptionResponse">
+        <xs:annotation>
+            <xs:documentation>Sent by the service provider to the client in reply to a subscription request message.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="RejectionReason" type="RejectionReason" nillable="true" minOccurs="0"/>
+            <xs:element name="RequestStatus" type="RequestStatus" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SubscriptionCancellationRequest">
+        <xs:annotation>
+            <xs:documentation>Sent by a client subscriber to request the service provider to stop sending data.</xs:documentation>
+        </xs:annotation>
+    </xs:complexType>
+    <xs:complexType name="SubscriptionCancellationResponse">
+        <xs:annotation>
+            <xs:documentation>Sent by the service provider to the client in reply to a subscription cancellation request message.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="RejectionReason" type="RejectionReason" nillable="true" minOccurs="0"/>
+            <xs:element name="RequestStatus" type="RequestStatus" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="ServiceStatus">
+        <xs:annotation>
+            <xs:documentation>Provides details of a service.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Subscribed" />
+            <xs:enumeration value="Unsubscribed" />
+            <xs:enumeration value="Available" />
+            <xs:enumeration value="Unavailable" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RejectionReason">
+        <xs:annotation>
+            <xs:documentation>The reason that a request from a client was
+                rejected. For example, the client may not be permitted to access the
+                requested data.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1024" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RequestStatus">
+        <xs:annotation>
+            <xs:documentation>The status of a request from a client which may be
+                Accepted, Rejected or Unavailable.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Accepted" />
+            <xs:enumeration value="Rejected">
+                <xs:annotation>
+                    <xs:documentation>"Rejected" implies client has exceeded the number of allowance for subscription request.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Unavailable">
+                <xs:annotation>
+                    <xs:documentation>"Unavailable" implies that there is a problem
+                        with the Gateway service or the back-end system supplying the data. The
+                        client can therefore try again later.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://fcs2.changiairport.com" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="http://fcs2.changiairport.com" xmlns:iata="http://www.iata.org/IATA/2007/00" xmlns:aocs="http://fcs2.changiairport.com"
+           elementFormDefault="qualified" version="1.0" id="FCS2_1.0">
+    
+    <xs:simpleType name="Numeric1to50">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Used for Numeric values, from 1 to 50 inclusive</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:simpleType name="Numeric0to9999">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Used for Numeric values, from 0 to 9999 inclusive</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="9999"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="StringLength1">
+        <xs:annotation>
+            <xs:documentation>Used for Strings, length exactly 1</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StringLength3">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Used for Strings, length exactly 3</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3"/>
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StringLength8">
+        <xs:annotation>
+            <xs:documentation>Used for Strings, length exactly 8</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="8"/>
+            <xs:maxLength value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StringLength9">
+        <xs:annotation>
+            <xs:documentation>Used for Strings, length exactly 9</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="9"/>
+            <xs:maxLength value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+    <xs:simpleType name="StringLength1to12">
+        <xs:annotation>
+            <xs:documentation>Used for Strings, length 1 to 12</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="StringLength1to64">
+        <xs:annotation>
+            <xs:documentation>Used for strings, length 1 to 64.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="64"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CodeContext">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ICAO"/>
+            <xs:enumeration value="IATA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="PropertyValue">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="propertyName" type="xs:string" use="required"/>
+                <xs:attribute name="codeContext" type="CodeContext" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+	
+    <xs:simpleType name="Numeric1to99">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Used for Numeric values, from 1 to 99 inclusive</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="99"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
